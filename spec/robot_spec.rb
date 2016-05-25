@@ -1,24 +1,34 @@
 require 'spec_helper'
 
 describe Robot do
+  let(:board) { Board.new }
   subject { Robot.new }
+
+  before(:each) do
+    subject.place(0, 0, 'N')
+    board.add_robot(subject)
+  end
 
   describe '#place' do
     it 'places the robot in the provided x, y locations
                                   facing given direction' do
       subject.place(0, 0, 'N')
-      expect(subject.x).to eq(0)
-      expect(subject.y).to eq(0)
-      expect(subject.direction).to eq('N')
+      expect(subject.report).to eq('0, 0, N')
     end
   end
 
   describe '#move' do
     it 'moves the robot towards the current direction by 1' do
       subject.move
-      expect(subject.x).to eq(0)
-      expect(subject.y).to eq(1)
-      expect(subject.direction).to eq('N')
+      expect(subject.report).to eq('0, 1, N')
+    end
+
+    context 'when the next moving position is inavlid' do
+      it 'raise invalid movement exception' do
+        subject.left
+        expect { subject.move }.to raise_error('illegal move')
+        expect(subject.position.x).to eq(0)
+      end
     end
   end
 
@@ -31,14 +41,14 @@ describe Robot do
   describe '#left' do
     it 'changes current direction by 90 degrees anti clockwise' do
       subject.left
-      expect(subject.direction).to eq('W')
+      expect(subject.report).to eq('0, 0, W')
     end
   end
 
   describe '#right' do
     it 'changes current direction by 90 degrees clockwise' do
       subject.right
-      expect(subject.direction).to eq('E')
+      expect(subject.report).to eq('0, 0, E')
     end
   end
 

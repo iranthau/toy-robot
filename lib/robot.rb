@@ -1,59 +1,59 @@
 # Robot
 class Robot
-  attr_reader :x, :y, :direction
+  DIRECTION = %w(N E S W).freeze
 
-  def initialize
-    @x = 0
-    @y = 0
-    @direction = 'N'
-  end
+  attr_reader :position
+  attr_accessor :board
 
   def place(x, y, direction)
-    @x = x
-    @y = y
-    @direction = direction
+    @position = Position.new(x, y)
+    @direction = DIRECTION.index(direction)
   end
 
   def move
+    raise 'illegal move' unless @board.position_valid?(next_move)
     case direction
     when 'N'
-      @y += 1
+      @position.move_north
     when 'E'
-      @x += 1
+      @position.move_east
     when 'S'
-      @y -= 1
+      @position.move_south
     when 'W'
-      @x -= 1
+      @position.move_west
     end
   end
 
   def left
-    case direction
-    when 'N'
-      @direction = 'W'
-    when 'E'
-      @direction = 'N'
-    when 'S'
-      @direction = 'E'
-    when 'W'
-      @direction = 'S'
-    end
+    @direction -= 1
   end
 
   def right
-    case direction
-    when 'N'
-      @direction = 'E'
-    when 'E'
-      @direction = 'S'
-    when 'S'
-      @direction = 'W'
-    when 'W'
-      @direction = 'N'
-    end
+    @direction += 1
   end
 
   def report
-    "#{x}, #{y}, #{direction}"
+    "#{@position.x}, #{@position.y}, #{direction}"
+  end
+
+  private
+
+  def next_move
+    position = Position.new(@position.x, @position.y)
+    case direction
+    when 'N'
+      position.move_north
+    when 'E'
+      position.move_east
+    when 'S'
+      position.move_south
+    when 'W'
+      position.move_west
+    end
+    position
+  end
+
+  def direction
+    DIRECTION[@direction]
   end
 end

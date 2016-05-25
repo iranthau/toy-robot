@@ -1,1 +1,3 @@
-require "robot"
+require 'robot'
+require 'position'
+require 'board'
