@@ -73,4 +73,9 @@ describe Robot do
     subject.move
     expect(subject.report).to eq('3, 3, N')
   end
+
+  it 'turn left 5 times' do
+    5.times { subject.left }
+    expect(subject.report).to eq('0, 0, W')
+  end
 end

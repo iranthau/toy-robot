@@ -54,6 +54,6 @@ class Robot
   end
 
   def direction
-    DIRECTION[@direction]
+    DIRECTION[@direction % 4]
   end
 end
