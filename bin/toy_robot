@@ -3,6 +3,6 @@
 LIB_DIR = File.expand_path(File.join(File.dirname(__FILE__), '../lib'))
 $LOAD_PATH.unshift(LIB_DIR)
 
-require 'robot'
+require 'toy_robot'
 
-ToyRobot.run()
+ToyRobot.start

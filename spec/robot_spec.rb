@@ -1,13 +1,7 @@
 require 'spec_helper'
 
 describe Robot do
-  let(:board) { Board.new }
   subject { Robot.new }
-
-  before(:each) do
-    subject.place(0, 0, 'N')
-    board.add_robot(subject)
-  end
 
   describe '#place' do
     it 'places the robot in the provided x, y locations
@@ -21,14 +15,6 @@ describe Robot do
     it 'moves the robot towards the current direction by 1' do
       subject.move
       expect(subject.report).to eq('0, 1, N')
-    end
-
-    context 'when the next moving position is inavlid' do
-      it 'raise invalid movement exception' do
-        subject.left
-        expect { subject.move }.to raise_error('illegal move')
-        expect(subject.position.x).to eq(0)
-      end
     end
   end
 
