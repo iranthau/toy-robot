@@ -24,6 +24,7 @@ class ToyRobot
       else
         puts 'Invalid command'
       end
+      puts "Robot is at #{robot.report}"
       print_moves
     end
   end
@@ -56,6 +57,6 @@ class ToyRobot
   end
 
   def self.print_moves
-    puts 'Accepted commnands: PLACE, MOVE, LEFT, RIGHT, REPORT'
+    puts 'Accepted commnands: PLACE, MOVE, LEFT, RIGHT, REPORT, EXIT'
   end
 end
