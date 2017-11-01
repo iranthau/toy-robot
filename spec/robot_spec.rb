@@ -4,8 +4,7 @@ describe Robot do
   subject { Robot.new }
 
   describe '#place' do
-    it 'places the robot in the provided x, y locations
-                                  facing given direction' do
+    it 'places the robot at x, y locations facing given direction' do
       subject.place(0, 0, 'N')
       expect(subject.report).to eq('0, 0, N')
     end
@@ -50,8 +49,7 @@ describe Robot do
     expect(subject.report).to eq('0, 0, W')
   end
 
-  it 'places the robot at given position and move 2 steps and
-                  make a left turn and move 1 step and reports' do
+  it 'places the robot, moves 2 steps, turns left, moves 1 step and reports' do
     subject.place(1, 2, 'E')
     subject.move
     subject.move
