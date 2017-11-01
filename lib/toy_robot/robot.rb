@@ -13,9 +13,10 @@ class Robot
     'W' => West.new
   }.freeze
 
-  attr_reader :position
+  attr_reader :position, :name
 
-  def initialize
+  def initialize(name)
+    @name = name
     @position = Position.new
     @direction = DIRECTION['N']
     @directions = DIRECTION.values

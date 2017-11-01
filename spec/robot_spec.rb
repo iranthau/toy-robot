@@ -1,7 +1,11 @@
 require 'spec_helper'
 
 describe Robot do
-  subject { Robot.new }
+  subject { Robot.new("Beefy") }
+
+  it "has the name Beefy" do
+    expect(subject.name).to eq("Beefy")
+  end
 
   describe '#place' do
     it 'places the robot at x, y locations facing given direction' do

@@ -7,7 +7,7 @@ class Board
   def initialize(rows = 5, cols = 5)
     @rows = rows
     @cols = cols
-    @robot = Robot.new
+    @robot = Robot.new("Beefy")
   end
 
   def position_valid?(position)

@@ -24,7 +24,7 @@ class ToyRobot
       else
         puts 'Invalid command'
       end
-      puts "Robot is at #{robot.report}"
+      puts "#{robot.name} is at #{robot.report}"
       print_moves
     end
   end
