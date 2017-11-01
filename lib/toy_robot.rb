@@ -39,8 +39,9 @@ class ToyRobot
     puts 'Position: '
     x, y = gets.chomp.split(' ')
     puts 'Direction: '
-    direction = gets.chomp
+    direction = gets.chomp.upcase
     position = Position.new(x, y)
+    # TODO Handle invalid direction input
     if board.position_valid?(position)
       board.robot.place(x, y, direction)
       return true
