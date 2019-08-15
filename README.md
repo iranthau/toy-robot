@@ -1,5 +1,7 @@
 # Toy Robot
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d40c7cf2f5454036bed2ead5e73c8d80)](https://app.codacy.com/app/iranthau/toy-robot?utm_source=github.com&utm_medium=referral&utm_content=iranthau/toy-robot&utm_campaign=Badge_Grade_Settings)
+
 The application is an extended version of Toy Robot which has more functionalities like custom board size. It is written in Ruby and uses rspec as the test framework.
 
 ### Run
