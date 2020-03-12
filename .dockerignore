@@ -1,0 +1,10 @@
+.DS_Store
+.ruby-version
+.rspec
+.git
+.gitignore
+.dockerignore
+.byebug_history
+Dockerfile
+docker-compose.yml
+README.md
