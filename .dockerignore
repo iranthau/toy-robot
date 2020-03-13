@@ -1,6 +1,5 @@
 .DS_Store
 .ruby-version
-.rspec
 .git
 .gitignore
 .dockerignore
