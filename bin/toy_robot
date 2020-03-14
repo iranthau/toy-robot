@@ -3,6 +3,25 @@
 LIB_DIR = File.expand_path(File.join(File.dirname(__FILE__), '../lib'))
 $LOAD_PATH.unshift(LIB_DIR)
 
-require 'toy_robot'
+Dir['lib/**/*.rb'].map {|file| require file.gsub('lib/','') }
 
-ToyRobot.start
+board = ToyRobot::Board.new
+robot = ToyRobot::Robot.new
+robot_runner = RobotRunner.new(board, robot)
+
+puts '------------------------------ Toy Robot ----------------------------------'
+puts "Board size: #{board.rows}x#{board.cols}"
+puts 'Place the robot to start the simulator'
+puts "Accepted commnands: 'PLACE X,Y,Z', 'MOVE', 'LEFT', 'RIGHT', 'REPORT', 'EXIT'"
+
+while command = gets.chomp.upcase
+  break if command == 'EXIT'
+
+  begin
+    command = robot_runner.run(command)
+    puts command.run
+  rescue StandardError => e
+    puts e.message
+    next
+  end
+end

@@ -1,8 +1,6 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-require 'toy_robot/robot'
-require 'toy_robot/position'
-require 'toy_robot/board'
+Dir['lib/**/*.rb'].map {|file| require file.gsub('lib/','') }
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
