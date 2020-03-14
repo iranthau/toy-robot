@@ -1,58 +1,43 @@
-require 'toy_robot/position'
-require 'toy_robot/direction/north'
-require 'toy_robot/direction/east'
-require 'toy_robot/direction/south'
-require 'toy_robot/direction/west'
+module ToyRobot
+  class RobotError < StandardError; end
 
-# Robot
-class Robot
-  DIRECTION = {
-    'N' => North.new,
-    'E' => East.new,
-    'S' => South.new,
-    'W' => West.new
-  }.freeze
+  class Robot
+    attr_reader :position
 
-  attr_reader :position, :name
+    def move
+      raise RobotError, 'place the robot first' if position.nil?
 
-  def initialize(name)
-    @name = name
-    @position = Position.new
-    @direction = DIRECTION['N']
-    @directions = DIRECTION.values
-  end
+      @position = position.go
+    end
 
-  def place(x, y, direction)
-    @position = Position.new(x.to_i, y.to_i)
-    @direction = DIRECTION[direction]
-  end
+    def place(new_position)
+      raise RobotError, 'valid cordinations are required' if new_position.nil?
 
-  def move
-    @position = @direction.move(@position)
-  end
+      @position = new_position
+    end
 
-  def left
-    direction_index = @directions.index(@direction)
-    @direction = @directions[direction_index - 1]
-  end
+    def report
+      return 'robot is not placed yet' if position.nil?
 
-  def right
-    direction_index = @directions.index(@direction)
-    @direction = @directions[direction_index + 1]
-  end
+      position.to_s
+    end
 
-  def try_move
-    position = Position.new(@position.x, @position.y)
-    @direction.move(position)
-  end
+    def turn_left
+      raise RobotError, 'place the robot first' if position.nil?
 
-  def report
-    "#{@position.x}, #{@position.y}, #{direction}"
-  end
+      @position = position.turn('LEFT')
+    end
 
-  private
+    def turn_right
+      raise RobotError, 'place the robot first' if position.nil?
 
-  def direction
-    DIRECTION.key(@direction)
+      @position = position.turn('RIGHT')
+    end
+
+    def try_move
+      raise RobotError, 'place the robot first' if position.nil?
+
+      ToyRobot::Position.new(position.x, position.y, position.direction).go
+    end
   end
 end
