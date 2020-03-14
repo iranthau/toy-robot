@@ -3,7 +3,7 @@ RSpec.describe ToyRobot::Position do
 
   let(:x) { 0 }
   let(:y) { 0 }
-  let(:direction) { 'N' }
+  let(:direction) { 'NORTH' }
 
   describe '.new' do
     context 'when the cordinations are NOT given' do
@@ -25,75 +25,91 @@ RSpec.describe ToyRobot::Position do
     end
   end
 
-  describe '#to_north' do
-    subject(:to_north) { position.to_north }
+  describe '#go' do
+    subject(:go) { position.go }
 
-    it 'moves north by 1 step' do
-      to_north
+    context 'when robot facing north' do
+      it 'moves north' do
+        go
 
-      expect(position.x).to eq(0)
-      expect(position.y).to eq(1)
-      expect(position.direction).to eq('NORTH')
+        expect(go.x).to eq(0)
+        expect(go.y).to eq(1)
+        expect(go.direction).to eq('NORTH')
+      end
+    end
+
+    context 'when robot facing east' do
+      let(:direction) { 'EAST' }
+
+      it 'moves east' do
+        go
+
+        expect(go.x).to eq(1)
+        expect(go.y).to eq(0)
+        expect(go.direction).to eq('EAST')
+      end
+    end
+
+    context 'when robot facing south' do
+      let(:direction) { 'SOUTH' }
+
+      it 'moves south' do
+        go
+
+        expect(go.x).to eq(0)
+        expect(go.y).to eq(-1)
+        expect(go.direction).to eq('SOUTH')
+      end
+    end
+
+    context 'when robot facing west' do
+      let(:direction) { 'WEST' }
+
+      it 'moves west' do
+        go
+
+        expect(go.x).to eq(-1)
+        expect(go.y).to eq(0)
+        expect(go.direction).to eq('WEST')
+      end
     end
   end
 
-  describe '#to_east' do
-    subject(:to_east) { position.to_east }
+  describe '#turn' do
+    subject(:turn) { position.turn(orientation) }
 
-    it 'moves east by 1 step' do
-      to_east
+    let(:orientation) { 'LEFT' }
 
-      expect(position.x).to eq(1)
-      expect(position.y).to eq(0)
-      expect(position.direction).to eq('NORTH')
+    context 'when robot facing NORTH' do
+      context 'when orientation is LEFT' do
+        it 'turns left' do
+          turn
+
+          expect(turn.x).to eq(0)
+          expect(turn.y).to eq(0)
+          expect(turn.direction).to eq('WEST')
+        end
+      end
+
+      context 'when orientation is RIGHT' do
+        let(:orientation) { 'RIGHT' }
+
+        it 'turns right' do
+          turn
+
+          expect(turn.x).to eq(0)
+          expect(turn.y).to eq(0)
+          expect(turn.direction).to eq('EAST')
+        end
+      end
     end
   end
 
-  describe '#to_south' do
-    subject(:to_south) { position.to_south }
-
-    it 'moves south by 1 step' do
-      to_south
-
-      expect(position.x).to eq(0)
-      expect(position.y).to eq(-1)
-      expect(position.direction).to eq('NORTH')
-    end
-  end
-
-  describe '#to_west' do
-    subject(:to_west) { position.to_west }
-
-    it 'moves west by 1 step' do
-      to_west
-
-      expect(position.x).to eq(-1)
-      expect(position.y).to eq(0)
-      expect(position.direction).to eq('NORTH')
-    end
-  end
-
-  describe '#to_right' do
-    subject(:to_right) { position.to_right }
-
-    it 'turns right' do
-      to_right
-
-      expect(position.x).to eq(0)
-      expect(position.y).to eq(0)
-      expect(position.direction).to eq('EAST')
-    end
-  end
-
-  describe '#to_left' do
-    subject(:to_left) { position.to_left }
+  describe '#to_s' do
+    subject(:to_s) { position.to_s }
 
     it 'turns left' do
-      to_left
-
-      expect(position.x).to eq(0)
-      expect(position.y).to eq(0)
-      expect(position.direction).to eq('WEST')
+      expect(to_s).to eq('0, 0, NORTH')
     end
   end
 end
