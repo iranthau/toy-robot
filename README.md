@@ -1,4 +1,4 @@
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e09e10a6a966415699cff5a8007b2c05)](https://www.codacy.com/app/iranthau/toy-robot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=iranthau/toy-robot&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e09e10a6a966415699cff5a8007b2c05)](https://www.codacy.com/app/iranthau/toy-robot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=iranthau/toy-robot&amp;utm_campaign=Badge_Grade) [![Actions Status](https://github.com/iranthau/toy-robot/workflows/Toy%20robot%20test/badge.svg)](https://github.com/iranthau/toy-robot/actions)
 
 # Toy Robot
 
