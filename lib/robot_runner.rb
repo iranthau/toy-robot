@@ -22,6 +22,8 @@ class RobotRunner
       ToyRobot::RightCommand.new(robot)
     when 'REPORT'
       ToyRobot::ReportCommand.new(robot)
+    else
+      raise ToyRobot::CommandError, 'invalid command'
     end
   end
 

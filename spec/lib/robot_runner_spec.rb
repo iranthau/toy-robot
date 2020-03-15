@@ -26,6 +26,14 @@ RSpec.describe RobotRunner do
 
     let(:command) { 'PLACE 1,2,NORTH' }
 
+    context 'when the user enters an invalid command' do
+      let(:command) { 'invalid_command' }
+
+      it 'raises an error' do
+        expect { run }.to raise_error(ToyRobot::CommandError, 'invalid command')
+      end
+    end
+
     context 'when user enters PLACE command' do
       let(:place_command_mock) { instance_double(ToyRobot::PlaceCommand) }
       let(:position_mock) { instance_double(ToyRobot::Position) }
