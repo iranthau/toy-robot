@@ -35,27 +35,35 @@ RSpec.describe RobotRunner do
     end
 
     context 'when user enters PLACE command' do
-      let(:place_command_mock) { instance_double(ToyRobot::Command::Place) }
       let(:position_mock) { instance_double(ToyRobot::Position) }
 
       before do
-        allow(ToyRobot::Command::Place).to receive(:new) { place_command_mock }
+        allow(ToyRobot::Command::Place).to receive(:new)
         allow(ToyRobot::Position).to receive(:new) { position_mock }
       end
 
-      it 'executes place command' do
-        run
+      context 'when the place command is invalid' do
+        let(:command) { 'PLACE 1,2' }
 
-        expect(ToyRobot::Command::Place).to have_received(:new).with(board, robot, position_mock)
+        it 'raises an error' do
+          expect { run }.to raise_error(ToyRobot::Command::CommandError, 'invalid command')
+        end
+      end
+
+      context 'when the place command is valid' do
+        it 'executes place command' do
+          run
+
+          expect(ToyRobot::Command::Place).to have_received(:new).with(board, robot, position_mock)
+        end
       end
     end
 
     context 'when user enters MOVE command' do
       let(:command) { 'MOVE' }
-      let(:move_command_mock) { instance_double(ToyRobot::Command::Move) }
 
       before do
-        allow(ToyRobot::Command::Move).to receive(:new) { move_command_mock }
+        allow(ToyRobot::Command::Move).to receive(:new)
       end
 
       it 'executes move command' do
@@ -67,10 +75,9 @@ RSpec.describe RobotRunner do
 
     context 'when user enters LEFT command' do
       let(:command) { 'LEFT' }
-      let(:left_command_mock) { instance_double(ToyRobot::Command::Left) }
 
       before do
-        allow(ToyRobot::Command::Left).to receive(:new) { left_command_mock }
+        allow(ToyRobot::Command::Left).to receive(:new)
       end
 
       it 'executes left command' do
@@ -82,10 +89,9 @@ RSpec.describe RobotRunner do
 
     context 'when user enters RIGHT command' do
       let(:command) { 'RIGHT' }
-      let(:right_command_mock) { instance_double(ToyRobot::Command::Right) }
 
       before do
-        allow(ToyRobot::Command::Right).to receive(:new) { right_command_mock }
+        allow(ToyRobot::Command::Right).to receive(:new)
       end
 
       it 'executes right command' do
@@ -97,10 +103,9 @@ RSpec.describe RobotRunner do
 
     context 'when user enters REPORT command' do
       let(:command) { 'REPORT' }
-      let(:report_command_mock) { instance_double(ToyRobot::Command::Report) }
 
       before do
-        allow(ToyRobot::Command::Report).to receive(:new) { report_command_mock }
+        allow(ToyRobot::Command::Report).to receive(:new)
       end
 
       it 'executes report command' do

@@ -13,7 +13,7 @@ class RobotRunner
 
     case command.first
     when 'PLACE'
-      ToyRobot::Command::Place.new(board, robot, ToyRobot::Position.new(*command.last.split(',')))
+      ToyRobot::Command::Place.new(board, robot, position(command.last.split(',')))
     when 'MOVE'
       ToyRobot::Command::Move.new(board, robot)
     when 'LEFT'
@@ -30,4 +30,10 @@ class RobotRunner
   private
 
   attr_reader :board, :robot
+
+  def position(args)
+    raise ToyRobot::Command::CommandError, 'invalid command' if args.count != 3
+
+    ToyRobot::Position.new(*args)
+  end
 end
