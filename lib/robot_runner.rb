@@ -13,17 +13,17 @@ class RobotRunner
 
     case command.first
     when 'PLACE'
-      ToyRobot::PlaceCommand.new(board, robot, ToyRobot::Position.new(*command.last.split(',')))
+      ToyRobot::Command::Place.new(board, robot, ToyRobot::Position.new(*command.last.split(',')))
     when 'MOVE'
-      ToyRobot::MoveCommand.new(board, robot)
+      ToyRobot::Command::Move.new(board, robot)
     when 'LEFT'
-      ToyRobot::LeftCommand.new(robot)
+      ToyRobot::Command::Left.new(robot)
     when 'RIGHT'
-      ToyRobot::RightCommand.new(robot)
+      ToyRobot::Command::Right.new(robot)
     when 'REPORT'
-      ToyRobot::ReportCommand.new(robot)
+      ToyRobot::Command::Report.new(robot)
     else
-      raise ToyRobot::CommandError, 'invalid command'
+      raise ToyRobot::Command::CommandError, 'invalid command'
     end
   end
 

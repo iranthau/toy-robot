@@ -1,4 +1,4 @@
-RSpec.describe ToyRobot::RightCommand do
+RSpec.describe ToyRobot::Command::Right do
   subject(:right_command) { described_class.new(robot) }
 
   let(:robot) { nil }
@@ -6,7 +6,7 @@ RSpec.describe ToyRobot::RightCommand do
   describe '.new' do
     context 'when the robot is missing' do
       it 'raises an error' do
-        expect{ right_command }.to raise_error(ToyRobot::CommandError, 'robot is required')
+        expect{ right_command }.to raise_error(ToyRobot::Command::CommandError, 'robot is required')
       end
     end
 

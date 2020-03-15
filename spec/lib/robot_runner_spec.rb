@@ -30,83 +30,83 @@ RSpec.describe RobotRunner do
       let(:command) { 'invalid_command' }
 
       it 'raises an error' do
-        expect { run }.to raise_error(ToyRobot::CommandError, 'invalid command')
+        expect { run }.to raise_error(ToyRobot::Command::CommandError, 'invalid command')
       end
     end
 
     context 'when user enters PLACE command' do
-      let(:place_command_mock) { instance_double(ToyRobot::PlaceCommand) }
+      let(:place_command_mock) { instance_double(ToyRobot::Command::Place) }
       let(:position_mock) { instance_double(ToyRobot::Position) }
 
       before do
-        allow(ToyRobot::PlaceCommand).to receive(:new) { place_command_mock }
+        allow(ToyRobot::Command::Place).to receive(:new) { place_command_mock }
         allow(ToyRobot::Position).to receive(:new) { position_mock }
       end
 
       it 'executes place command' do
         run
 
-        expect(ToyRobot::PlaceCommand).to have_received(:new).with(board, robot, position_mock)
+        expect(ToyRobot::Command::Place).to have_received(:new).with(board, robot, position_mock)
       end
     end
 
     context 'when user enters MOVE command' do
       let(:command) { 'MOVE' }
-      let(:move_command_mock) { instance_double(ToyRobot::MoveCommand) }
+      let(:move_command_mock) { instance_double(ToyRobot::Command::Move) }
 
       before do
-        allow(ToyRobot::MoveCommand).to receive(:new) { move_command_mock }
+        allow(ToyRobot::Command::Move).to receive(:new) { move_command_mock }
       end
 
       it 'executes move command' do
         run
 
-        expect(ToyRobot::MoveCommand).to have_received(:new).with(board, robot)
+        expect(ToyRobot::Command::Move).to have_received(:new).with(board, robot)
       end
     end
 
     context 'when user enters LEFT command' do
       let(:command) { 'LEFT' }
-      let(:left_command_mock) { instance_double(ToyRobot::LeftCommand) }
+      let(:left_command_mock) { instance_double(ToyRobot::Command::Left) }
 
       before do
-        allow(ToyRobot::LeftCommand).to receive(:new) { left_command_mock }
+        allow(ToyRobot::Command::Left).to receive(:new) { left_command_mock }
       end
 
       it 'executes left command' do
         run
 
-        expect(ToyRobot::LeftCommand).to have_received(:new).with(robot)
+        expect(ToyRobot::Command::Left).to have_received(:new).with(robot)
       end
     end
 
     context 'when user enters RIGHT command' do
       let(:command) { 'RIGHT' }
-      let(:right_command_mock) { instance_double(ToyRobot::RightCommand) }
+      let(:right_command_mock) { instance_double(ToyRobot::Command::Right) }
 
       before do
-        allow(ToyRobot::RightCommand).to receive(:new) { right_command_mock }
+        allow(ToyRobot::Command::Right).to receive(:new) { right_command_mock }
       end
 
       it 'executes right command' do
         run
 
-        expect(ToyRobot::RightCommand).to have_received(:new).with(robot)
+        expect(ToyRobot::Command::Right).to have_received(:new).with(robot)
       end
     end
 
     context 'when user enters REPORT command' do
       let(:command) { 'REPORT' }
-      let(:report_command_mock) { instance_double(ToyRobot::ReportCommand) }
+      let(:report_command_mock) { instance_double(ToyRobot::Command::Report) }
 
       before do
-        allow(ToyRobot::ReportCommand).to receive(:new) { report_command_mock }
+        allow(ToyRobot::Command::Report).to receive(:new) { report_command_mock }
       end
 
       it 'executes report command' do
         run
 
-        expect(ToyRobot::ReportCommand).to have_received(:new).with(robot)
+        expect(ToyRobot::Command::Report).to have_received(:new).with(robot)
       end
     end
   end
