@@ -1,20 +1,18 @@
-name: Docker Image CI
+name: Toy robot test
 
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: |
         docker build . --file Dockerfile --tag toy-robot
+    - name: Running tests
+      run: |
         docker container run --rm toy-robot bash -c 'rspec spec/'

@@ -76,5 +76,5 @@ bin/toy_robot
 Run test using docker,
 
 ```bash
-docker container run --rm -it toy-robot bash -c 'rspec spec/'
+docker container run --rm toy-robot bash -c 'rspec spec/'
 ```
