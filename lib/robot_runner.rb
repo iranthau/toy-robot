@@ -8,12 +8,13 @@ class RobotRunner
     @robot = robot
   end
 
-  def run(command)
-    command = command.split
+  def run(input)
+    args = input.split
+    command = args.shift
 
-    case command.first
+    case command
     when 'PLACE'
-      ToyRobot::Command::Place.new(board, robot, position(command.last.split(',')))
+      ToyRobot::Command::Place.new(board, robot, position(args.join.split(',')))
     when 'MOVE'
       ToyRobot::Command::Move.new(board, robot)
     when 'LEFT'
@@ -34,6 +35,6 @@ class RobotRunner
   def position(args)
     raise ToyRobot::Command::CommandError, 'invalid command' if args.count != 3
 
-    ToyRobot::Position.new(*args)
+    ToyRobot::Position.new(*args.map(&:strip))
   end
 end
