@@ -7,7 +7,9 @@ RSpec.describe ToyRobot::Robot do
     subject(:report) { robot.report }
 
     context 'when robot is NOT placed yet' do
-      it { is_expected.to eq('robot is not placed yet') }
+      it 'raises an error' do
+        expect { report }.to raise_error(ToyRobot::RobotError, 'place the robot first')
+      end
     end
 
     context 'when the robot is placed' do

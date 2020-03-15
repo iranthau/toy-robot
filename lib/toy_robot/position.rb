@@ -7,7 +7,7 @@ module ToyRobot
     attr_reader :x, :y, :direction
 
     def initialize(x, y, direction)
-      raise PositionError, 'valid cordinations are required' unless position_valid?(x, y, direction)
+      raise ToyRobot::PositionError, 'valid cordinations are required' unless position_valid?(x, y, direction)
 
       @x = x.to_i
       @y = y.to_i
@@ -17,13 +17,13 @@ module ToyRobot
     def go
       case direction
       when 'NORTH'
-        to_north
+        @y += 1
       when 'EAST'
-        to_east
+        @x += 1
       when 'SOUTH'
-        to_south
+        @y -= 1
       when 'WEST'
-        to_west
+        @x -= 1
       end
 
       ToyRobot::Position.new(x, y, direction)
@@ -48,22 +48,6 @@ module ToyRobot
 
     def position_valid?(x, y, direction)
       !x.nil? && !y.nil? && DIRECTION.include?(direction)
-    end
-
-    def to_north
-      @y += 1
-    end
-
-    def to_east
-      @x += 1
-    end
-
-    def to_south
-      @y -= 1
-    end
-
-    def to_west
-      @x -= 1
     end
 
     def to_right

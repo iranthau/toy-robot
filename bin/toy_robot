@@ -14,11 +14,11 @@ puts "Board size: #{board.rows}x#{board.cols}"
 puts 'Place the robot to start the simulator'
 puts "Accepted commnands: 'PLACE X,Y,Z', 'MOVE', 'LEFT', 'RIGHT', 'REPORT', 'EXIT'"
 
-while command = gets.chomp.upcase
-  break if command == 'EXIT'
+while input = gets.chomp.upcase
+  break if input == 'EXIT'
 
   begin
-    command = robot_runner.run(command)
+    command = robot_runner.run(input)
     puts command.run
   rescue StandardError => e
     puts e.message
