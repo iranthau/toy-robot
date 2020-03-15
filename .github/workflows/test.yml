@@ -1,4 +1,4 @@
-name: Toy robot test
+name: Test
 
 on:
   push:
