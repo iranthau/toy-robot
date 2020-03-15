@@ -42,4 +42,36 @@ RSpec.describe 'Robot moves around' do
       expect(robot.report).to eq('3, 3, NORTH')
     end
   end
+
+  describe 'Process a large data set' do
+    it do
+      command = robot_runner.run('PLACE 0,0,NORTH')
+      command.run
+
+      100_000.times do
+        4.times do
+          command = robot_runner.run('MOVE')
+          command.run
+        end
+
+        command = robot_runner.run('RIGHT')
+        command.run
+      end
+
+      command = robot_runner.run('MOVE')
+      command.run
+      command = robot_runner.run('RIGHT')
+      command.run
+
+      expect(robot.report).to eq('0, 1, EAST')
+    end
+  end
+
+  describe 'invalid input' do
+    subject(:invalid_command) { robot_runner.run('PLACE 0,0') }
+
+    it do
+      expect { invalid_command }.to raise_error ToyRobot::Command::CommandError, 'invalid command'
+    end
+  end
 end
